@@ -1,5 +1,5 @@
 'use strict';
-
+var FacebookStrategy = require('passport-facebook').Strategy;
 var GitHubStrategy = require('passport-github').Strategy;
 var User = require('../models/users');
 var configAuth = require('./auth');
