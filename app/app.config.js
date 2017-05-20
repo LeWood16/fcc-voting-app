@@ -7,6 +7,9 @@ angular.
       $locationProvider.hashPrefix('!');
 
       $routeProvider.
+        when('/test', {
+          template: '<fb-auth></fb-auth>'
+        }).
         when('/phones', {
           template: '<phone-list></phone-list>'
         }).

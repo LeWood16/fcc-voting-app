@@ -1,9 +1,9 @@
 {
-  "name": "angular-phonecat",
+  "name": "voting-app",
   "private": true,
   "version": "0.0.0",
-  "description": "A tutorial application for AngularJS",
-  "repository": "https://github.com/angular/angular-phonecat",
+  "description": "Dynamic Web Application for FreeCodeCamp",
+  "repository": "https://github.com/LeWood16/fcc-voting-app",
   "license": "MIT",
   "devDependencies": {
     "bower": "^1.7.7",
