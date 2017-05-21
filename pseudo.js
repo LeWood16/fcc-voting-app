@@ -11,9 +11,20 @@
       X-override default route with testing route 
       X-put route in app.config.js file
         X-insert component tag into template
-      -make component for fb-auth <<< LEFT OFF HERE
-        -make fb-auth template
-        -make fb-auth controller
+        X-create fb-auth feature directory
+          X-create fb-auth.module.js
+            -insert relevant code
+            X-into into index.html
+          X-create fb-auth.component.js
+            -template
+              X-create fb-auth.template.html
+              -insert relevant code
+            -controller
+              -insert relevant code
+            X-insert into index.html
+
+        X-insert fbAuth as a module dependency in app.module.js 
+
       -put angular logic in to check auth
     -create a test to check user login success
       -copy all tutorial files into branch
