@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ title }}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <nav>
+{{^user}}
+	<p>Welcome! Please <a href="/login">log in</a>.</p>
+{{/user}}
+{{#user}}
+	<p>Hello, {{ user.displayName }}. View your <a href="/profile">profile</a>.</p>
+{{/user}}
+  </nav>
+  
+</body>
+</html>
