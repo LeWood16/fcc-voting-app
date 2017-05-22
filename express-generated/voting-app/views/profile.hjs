@@ -2,7 +2,7 @@
 <html lang="en" ng-app>
   <head>
     <meta charset="utf-8">
-    <title>Log into Facebook</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <script src="bower_components/angular/angular.js"></script>
   </head>
@@ -11,7 +11,7 @@
   
 <div class="container-fluid">
   <div class="row">
-    <nav class="navbar navbar-inverse bg-inverse">
+<nav class="navbar navbar-inverse bg-primary">
 <p>
 ID: {{ user.id }}<br/>
 Username: {{ user.username }}<br/>

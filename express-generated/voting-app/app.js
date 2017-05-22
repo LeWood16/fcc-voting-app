@@ -33,7 +33,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hjs');
+app.set('view engine', 'hjs'); // use .html extension for templates 
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -48,29 +48,18 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-// Define routes.
-app.get('/',
-  function(req, res) {
-//    res.sendFile(path.join(__dirname+'/views/home.html', { user: req.user })
-
-    res.render('home', {
-      user: req.user
-    });
-    
-});
 
 /* GET home page. */
-app.get('/', function(req, res, next) {
-//    res.sendFile(path.join(__dirname+'/views/home.html', { user: req.user })
-    res.render('home', {
+app.get('/',
+  function(req, res) {
+   res.render('home', {
       user: req.user
     });
 });
-
 
 app.get('/login',
   function(req, res){
-    res.render('login');
+    res.sendFile(path.join(__dirname+'/views/login.html'));
   });
 
 app.get('/login/facebook',
