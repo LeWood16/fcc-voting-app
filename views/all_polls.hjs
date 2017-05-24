@@ -1,0 +1,10 @@
+<h3>All Polls</h3>
+
+<ul>
+  <li>Test Poll One</li>
+  <li>Test Poll Two</li>
+  <li>Test Poll Three</li>
+</ul>
+
+{{ poll.name }} // link to individual poll template (use poll name to link to)
+{{ }} 
