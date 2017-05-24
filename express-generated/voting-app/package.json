@@ -15,6 +15,7 @@
     "hogan-express": "^0.5.2",
     "mkdirp": "^0.5.1",
     "morgan": "~1.8.1",
+    "mustache": "^2.3.0",
     "nopt": "^4.0.1",
     "serve-favicon": "~2.4.2"
   }

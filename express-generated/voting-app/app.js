@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
+var hogan = require('hogan.js');
 
 
 // Configure the Facebook strategy for use by Passport.
@@ -38,7 +39,7 @@ app.set('view engine', 'hjs'); // use .html extension for templates
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(require('serve-static')(__dirname + '/../../public'));
+app.use(express.static(__dirname + '/public'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({
@@ -48,18 +49,33 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+// app.enable('view cache');
+
 
 /* GET home page. */
+/*
 app.get('/',
-  function(req, res) {
-   res.render('home', {
-      user: req.user
+  function(req, res){
+    res.sendFile(path.join(__dirname+'/views/home.html'));
+  });
+*/
+
+/* GET home page. */
+
+app.get('/',
+  function(req, res, next) {
+   res.render('home', 
+    {
+      user: req.user,
+      partials: {all_polls: 'all_polls'},
     });
 });
 
+
+
 app.get('/login',
   function(req, res){
-    res.sendFile(path.join(__dirname+'/views/login.html'));
+    res.render('login');
   });
 
 app.get('/login/facebook',
@@ -71,15 +87,26 @@ app.get('/login/facebook/return',
     res.redirect('/');
   });
 
+ 
+app.get('/my_polls',
+  require('connect-ensure-login').ensureLoggedIn(),
+  function(req, res){
+    res.render('my_polls', 
+    {user: req.user });
+  });
+  
+app.get('/all_polls',  function(req, res){
+    res.render('all_polls', 
+    {user: req.user });
+  });
+
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
-    console.log(res.user);
-    res.render('profile', { user: req.user });
+    res.render('profile', 
+    {user: req.user });
   });
-
-
-
+ 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
