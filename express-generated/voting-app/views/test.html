@@ -2,21 +2,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Voting App for FreeCodeCamp</title>
+    <title>Carousel Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
- <body>
-{{^user}}
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-	<p>Welcome! Please <a href="/login"><strong>log in</strong></a>.</p>
-</nav>
-{{> all_polls }}
-</body>
-{{/user}}
-<body>
-{{#user}}
+  <body>
+
         <nav class="navbar navbar-inverse navbar-static-top">
           <div class="container">
             <div class="navbar-header">
@@ -26,31 +18,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Voting App</a>
-              <p style ="color:white">Hello, {{ user.displayName }}.</p>
-
+              <a class="navbar-brand" href="#">Project name</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="active">
-            <a class="btn nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li>
-            <a class="btn nav-link" href="#">My Polls</a>
-          </li>
-          <li>
-            <a class="btn nav-link" href="#">New Poll</a>
-          </li>
-        </ul>
-          </div>
+              <ul class="nav navbar-nav">
+                    <li><a href="">Page 1</a>
+                    </li>
+                    <li><a href="">Page 2</a>
+                    </li>
+                    <li><a href="">Page 3</a>
+                    </li>
+
+              </ul>
+            </div>
           </div>
         </nav>
-        
-        <div class="container-fluid">
-          {{> all_polls }}
-        </div>
-    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-</body>
-{{/user}}
+ </body>
