@@ -53,7 +53,7 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.enable('view cache');
+// app.enable('view cache');
 
 /* GET home page. */
 
@@ -92,16 +92,17 @@ app.get('/my_polls',
   
   
 app.get('/all_polls', function(req, res, next) {
-  MongoClient.connect("mongodb://client_user:client_password@ds143071.mlab.com:43071/image-search-abstraction-layer", function(err, db) {  // CREATE MLAB DB FOR THIS PROJECT
+  MongoClient.connect("mongodb://lewood:bearringoMaybeBeez?@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, db) {  // CREATE MLAB DB FOR THIS PROJECT
     if (!err) {
    db.collection('polls').find({}, { _id: 0 }).toArray(function(err, polls) {   // AND COLLECTION 
         
         if (err) throw err;
+        console.log("all polls here:" + polls);
 
         // so now, we can return all searches to the screen.
-        res.status(200).json({
-          'polls': polls
-        });
+        res.render('all_polls'),
+        { polls: polls },
+        {user: req.user};
       });
     }
   });

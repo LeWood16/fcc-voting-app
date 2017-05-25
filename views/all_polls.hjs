@@ -5,6 +5,6 @@
   <li>Test Poll Two</li>
   <li>Test Poll Three</li>
 </ul>
-
-{{ poll.name }} // link to individual poll template (use poll name to link to)
-{{ }} 
+{{ polls }} 
+{{ user.displayName }}
+// link to individual poll template (use poll name to link to)

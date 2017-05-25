@@ -10,13 +10,14 @@ module.exports = new mongoose.Schema({
         required: true
     },
     options : [{ 
-        type: String,
+        option: {
+            type: String
+        },
         votes : {
             type: Number,
             required: true,
             default: 0
         }
-        
     }],
     voters : [{
         type: Number // if voter isn't in this array, they can vote
