@@ -57,13 +57,24 @@ app.enable('view cache');
 
 /* GET home page. */
 
-app.get('/',
-  function(req, res, next) {
-   res.render('home', 
+var MongoClient = require('mongodb').MongoClient;
+var db;
+
+// initialize connection once
+MongoClient.connect("mongodb://username:password@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, database) {
+  if (err) throw err;
+  db = database;
+});
+
+
+
+app.get('/', function(req, res, next) {
+  res.render('home', 
     {
       user: req.user,
-      partials: {all_polls: 'all_polls'},
-    });
+      partials: {all_polls: 'all_polls',
+    }
+  });
 });
 
 
@@ -82,38 +93,54 @@ app.get('/login/facebook/return',
     res.redirect('/');
   });
 
- 
+/*
 app.get('/my_polls',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
     res.render('my_polls', 
     {user: req.user });
   });
+*/
   
-  
-app.get('/all_polls', function(req, res, next) {
-  MongoClient.connect("mongodb://client_user:client_password@ds143071.mlab.com:43071/image-search-abstraction-layer", function(err, db) {  // CREATE MLAB DB FOR THIS PROJECT
+app.get('/my_polls', function(req, res, next) {
+  MongoClient.connect("mongodb://username:password@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, db) {
     if (!err) {
-   db.collection('polls').find({}, { _id: 0 }).toArray(function(err, polls) {   // AND COLLECTION 
+      
+      // create polls collection as soon as first document is inserted
+      db.collection('polls', function(err, collection) {if (err) throw err});
+
+      db.collection('polls').find({}, { _id: 0 }).toArray(function(err, polls) {
         
         if (err) throw err;
-
-        // so now, we can return all searches to the screen.
-        res.status(200).json({
-          'polls': polls
-        });
+        
+        var template = hogan.compile('poll.hjs');
+        // so now, we can return all polls to the screen.
+        
+        var output = template.render(polls);
+        res.render(output);
+        /*
+        res.render('my_polls', 
+           {
+             user: req.user,
+             polls: polls[0]
+           }
+        );
+        */
       });
     }
   });
 });
 
+
+
+/*
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
     res.render('profile', 
     {user: req.user });
   });
- 
+ */
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
