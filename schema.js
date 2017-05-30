@@ -11,7 +11,12 @@ module.exports = new mongoose.Schema({
     },
     options : [{ 
         option: {
+<<<<<<< HEAD
             type: String
+=======
+            type: String,
+            required: true
+>>>>>>> mongo_client
         },
         votes : {
             type: Number,

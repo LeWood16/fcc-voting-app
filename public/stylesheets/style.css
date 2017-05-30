@@ -1,8 +1,9 @@
+/*
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+*/
 a {
   color: #00B7FF;
 }
@@ -20,6 +21,7 @@ a {
   border-top: 1px solid transparent;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
+
 .navbar.always-open .navbar-collapse.collapse {
   display: none!important;
 }
@@ -33,4 +35,19 @@ a {
 .navbar.always-open .navbar-nav>li>a {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+.nav-link:hover{
+  color: #F00;
+  background-color: #ccc;
+}
+
+.navbar-nav > li {
+  list-style: none;
 }
