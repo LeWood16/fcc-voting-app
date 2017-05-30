@@ -53,7 +53,10 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.enable('view cache');
+//app.use(express.json());       // to support JSON-encoded bodies
+//app.use(express.urlencoded()); // to support URL-encoded bodies
+// app.enable('view cache');
+
 
 /* GET home page. */
 
@@ -72,7 +75,10 @@ app.get('/', function(req, res, next) {
   res.render('home', 
     {
       user: req.user,
-      partials: {all_polls: 'all_polls',
+      partials: 
+    {
+      all_polls: 'all_polls',
+      navbar: 'navbar'
     }
   });
 });
@@ -131,6 +137,33 @@ app.get('/my_polls', function(req, res, next) {
   });
 });
 
+app.get('/new_poll', function(req, res, next){
+    res.render('new_poll', 
+    {
+      user: req.user,
+      partials: 
+    {
+        navbar: 'navbar'  
+    }
+  });
+});
+
+app.post('/new_poll', function(req, res, next){
+    var title = req.body.title;
+    var options = req.body.options;
+    createPoll(title, req.user.id, options);
+    res.render('home', 
+    {
+      user: req.user,
+      message: 'New poll created.',
+      partials: 
+    {
+      all_polls: 'all_polls',
+      navbar: 'navbar',
+    }
+  });
+});
+
 
 
 /*
@@ -160,8 +193,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-/*
-function createPoll(title, creator, options...){
+function createPoll(title, creator, options){
   
   let mongoose = require('mongoose');
   let schema = require('./schema');
@@ -169,15 +201,32 @@ function createPoll(title, creator, options...){
   // instantiate mongoose model inside function
   let Poll = mongoose.model('Poll', schema, 'polls');
   
+  // turn options argument into an array, separated by newlines (non-inclusive)
+  var lnRegExp = /\r?\n|\r/;
+  options = options.split(lnRegExp);
+
+  // now we rebuild options into the proper schema format, like so:
+  // {
+  //   "option": option[i],
+  //   "votes": 0
+  // }
+  var optionsArr = [];
+  for (let i = 0; i < options.length; i++){
+    let obj = {};
+    obj.option = options[i];
+    obj.votes = 0;
+    optionsArr.push(obj);
+  }
+
   // create poll instance to be inserted into collection
   let poll = new Poll({
     title: title,
     creator: creator,
-    options: options
+    options: optionsArr
   });
-
+  
   // Connect to the db
-  MongoClient.connect("mongodb://client_user:client_password@ds143071.mlab.com:43071/image-search-abstraction-layer", function(err, db) {
+  MongoClient.connect("mongodb://username:password@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, db) {
   if (!err) {
        
     // create polls collection as soon as first document is inserted
@@ -189,7 +238,7 @@ function createPoll(title, creator, options...){
   }
   });
 }
-*/
+
 
 
 module.exports = app;
