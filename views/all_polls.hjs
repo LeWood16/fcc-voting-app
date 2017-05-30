@@ -6,11 +6,5 @@
   <li>Test Poll Three</li>
   <li>Test Poll Four</li>
 </ul>
-<<<<<<< HEAD
-{{ polls }} 
-{{ user.displayName }}
-// link to individual poll template (use poll name to link to)
-=======
 
 {{ polls }} 
->>>>>>> mongo_client

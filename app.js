@@ -53,14 +53,10 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-<<<<<<< HEAD
-// app.enable('view cache');
-=======
 //app.use(express.json());       // to support JSON-encoded bodies
 //app.use(express.urlencoded()); // to support URL-encoded bodies
 // app.enable('view cache');
 
->>>>>>> mongo_client
 
 /* GET home page. */
 
@@ -68,7 +64,7 @@ var MongoClient = require('mongodb').MongoClient;
 var db;
 
 // initialize connection once
-MongoClient.connect("mongodb://username:password@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, database) {
+  MongoClient.connect("mongodb://username:password@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, database) {
   if (err) throw err;
   db = database;
 });
@@ -112,14 +108,9 @@ app.get('/my_polls',
   });
 */
   
-<<<<<<< HEAD
   
 app.get('/all_polls', function(req, res, next) {
   MongoClient.connect("mongodb://lewood:bearringoMaybeBeez?@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, db) {  // CREATE MLAB DB FOR THIS PROJECT
-=======
-app.get('/my_polls', function(req, res, next) {
-  MongoClient.connect("mongodb://username:password@ds139801.mlab.com:39801/lewood-fcc-voting-app", function(err, db) {
->>>>>>> mongo_client
     if (!err) {
       
       // create polls collection as soon as first document is inserted
@@ -128,14 +119,6 @@ app.get('/my_polls', function(req, res, next) {
       db.collection('polls').find({}, { _id: 0 }).toArray(function(err, polls) {
         
         if (err) throw err;
-<<<<<<< HEAD
-        console.log("all polls here:" + polls);
-
-        // so now, we can return all searches to the screen.
-        res.render('all_polls'),
-        { polls: polls },
-        {user: req.user};
-=======
         
         var template = hogan.compile('poll.hjs');
         // so now, we can return all polls to the screen.
@@ -150,7 +133,6 @@ app.get('/my_polls', function(req, res, next) {
            }
         );
         */
->>>>>>> mongo_client
       });
     }
   });
