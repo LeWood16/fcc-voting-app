@@ -72,14 +72,26 @@ var db;
 
 
 app.get('/', function(req, res, next) {
-  res.render('home', 
-    {
-      user: req.user,
-      partials: 
-    {
-      all_polls: 'all_polls',
-      navbar: 'navbar'
-    }
+  
+  // create polls collection as soon as first document is inserted
+  db.collection('polls', function(err, collection) {if (err) throw err});
+  
+  db.collection('polls').find({}).toArray(function(err, polls) {
+        
+    if (err) throw err;
+
+    res.render('home', 
+      {
+       user: req.user,
+       polls: polls,
+       partials: 
+       {
+          head: 'head',
+          navbar: 'navbar',
+       }
+      }
+    );
+        
   });
 });
 
@@ -99,14 +111,29 @@ app.get('/login/facebook/return',
     res.redirect('/');
   });
 
-/*
-app.get('/my_polls',
-  require('connect-ensure-login').ensureLoggedIn(),
-  function(req, res){
-    res.render('my_polls', 
-    {user: req.user });
-  });
-*/
+app.get('/all_polls', function(req, res, next) {
+  
+      // create polls collection as soon as first document is inserted
+      db.collection('polls', function(err, collection) {if (err) throw err});
+
+      db.collection('polls').find({}).toArray(function(err, polls) {
+        
+        if (err) throw err;
+
+        res.render('all_polls', 
+        {
+             user: req.user,
+             polls: polls,
+             partials: 
+             {
+               head: 'head',
+               navbar: 'navbar',
+             }
+        }
+        );
+        
+      });
+});
   
   
 app.get('/my_polls', function(req, res, next) {
@@ -121,17 +148,17 @@ app.get('/my_polls', function(req, res, next) {
       db.collection('polls').find({creator: id}).toArray(function(err, polls) {
         
         if (err) throw err;
-        
-        // var template = hogan.compile('poll.hjs');
-        // so now, we can return all polls to the screen.
-        
-        // var output = template.render(polls);
-        console.log("creator id:" + req.user.id);
+
         res.render('my_polls', 
-           {
+        {
              user: req.user,
              polls: polls,
-           }
+             partials: 
+             {
+               head: 'head',
+               navbar: 'navbar',
+             }
+        }
         );
         
       });
