@@ -175,19 +175,41 @@ app.get('/new_poll', function(req, res, next){
   });
 });
 
-app.post('/new_poll', function(req, res, next){
-    var title = req.body.title;
-    var options = req.body.options;
-    createPoll(title, req.user.id, options);
-    res.render('home', 
-    {
+app.post('/new_poll', function(req, res, next) {
+  var title = req.body.title;
+  var options = req.body.options;
+  createPoll(title, req.user.id, options);
+
+  db.collection('polls').find({}).toArray(function(err, polls) {
+
+    if (err) throw err;
+
+    res.render('home', {
       user: req.user,
+      polls: polls,
       message: 'New poll created.',
-      partials: 
-    {
-      all_polls: 'all_polls',
-      navbar: 'navbar',
-    }
+      partials: {
+        head: 'head',
+        navbar: 'navbar'
+      }
+    });
+  });
+});
+
+app.get('/poll', function(req, res, next){
+  
+  db.collection('polls').find({}).toArray(function(err, testPoll) {
+
+    if (err) throw err;
+
+    res.render('poll', {
+      user: req.user,
+      poll: testPoll,
+      partials: {
+        head: 'head',
+        navbar: 'navbar'
+      }
+    });
   });
 });
 

@@ -1,7 +1,7 @@
 <h3>All Polls</h3>
 {{#polls}}
 <ul class="center">
-<li>Title: {{ title }}</li>
+<li class="poll">Title: {{ title }}</li>
 </ul>
 {{/polls}}
 

@@ -30,6 +30,9 @@
           <li>
             <a class="btn nav-link" href="/new_poll">New Poll</a>
           </li>
+          <li>
+            <a class="btn nav-link" href="/poll">Test Poll</a>
+          </li>
         </ul>
       </div>
     </div>
